@@ -16,7 +16,8 @@ if uploaded_file is not None:
 
     st.info("🔎 Generating Data Profiling Report...")
 
-    report = sv.analyze(df)
+    # SAFE MODE Sweetviz (prevents crash)
+    report = sv.analyze(df, pairwise_analysis="off")
 
     tmp_dir = tempfile.mkdtemp()
     report_path = os.path.join(tmp_dir, "report.html")
@@ -25,4 +26,4 @@ if uploaded_file is not None:
     with open(report_path, 'r', encoding='utf-8') as f:
         html_content = f.read()
 
-    st.components.v1.html(html_content, height=800, scrolling=True)
+    st.components.v1.html(html_content, height=900, scrolling=True)
